@@ -54,3 +54,36 @@ window.addEventListener("scroll", function () {
 });
 // ********** smooth scroll ************
 // select links
+const scrollLinks = document.querySelectorAll(".scroll-link");
+
+scrollLinks.forEach(function (link) {
+  link.addEventListener("click", function (e) {
+    //prevent default
+    e.preventDefault();
+    //navigate to the specific spot
+    // 注意typo：const id = e.currentTarget.getAtrribute('href');
+    const id = e.currentTarget.getAttribute("href").slice(1);
+    // console.log(id);
+    const element = document.getElementById(id);
+    // calculate the heights
+    const navHeight = navbar.getBoundingClientRect().height;
+    const containerHeight = LinksContainer.getBoundingClientRect().height;
+    const fixedNav = navbar.classList.contains("fixed-nav");
+    let position = element.offsetTop - navHeight;
+    // console.log(position);
+    if (!fixedNav) {
+      console.log(navHeight);
+      console.log(position);
+      position = position - navHeight;
+    }
+    if (navHeight > 82) {
+      position = position + containerHeight;
+    }
+    window.scrollTo({
+      left: 0,
+      top: position,
+    });
+    //页面滑动之后navbar的items收起
+    LinksContainer.style.height = 0;
+  });
+});
