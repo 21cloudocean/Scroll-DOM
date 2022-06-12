@@ -11,13 +11,26 @@ const date = document.querySelector(".date");
 // date.innerHTML = year;
 date.innerHTML = new Date().getFullYear();
 // ********** close links ************
-//在CSS中手动规定每条link的高度
 const navToggle = document.querySelector(".nav-toggle");
 const LinksContainer = document.querySelector(".links-container");
 const links = document.querySelector(".links");
+//在CSS中手动规定每条link的高度
+/*navToggle.addEventListener("click", function () {
+  LinksContainer.classList.toggle("show-links");
+});*/
 
 navToggle.addEventListener("click", function () {
-  LinksContainer.classList.toggle("show-links");
+  const containerHeight = LinksContainer.getBoundingClientRect().height;
+  //   console.log(containerHeight);
+  const linksHeight = links.getBoundingClientRect().height;
+  //   console.log(linksHeight);
+  //如果containerHeight为0，则动态添加height；反之则让container为0
+  if (containerHeight === 0) {
+    //注意：这一条是inline style
+    LinksContainer.style.height = `${linksHeight}px`;
+  } else {
+    LinksContainer.style.height = 0;
+  }
 });
 // ********** fixed navbar ************
 
