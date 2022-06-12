@@ -32,7 +32,25 @@ navToggle.addEventListener("click", function () {
     LinksContainer.style.height = 0;
   }
 });
+const navbar = document.querySelector("#nav");
+const topLink = document.querySelector(".top-link");
 // ********** fixed navbar ************
-
+window.addEventListener("scroll", function () {
+  const scrollHeight = window.pageYOffset;
+  const navHeight = navbar.getBoundingClientRect().height;
+  //   console.log(scrollHeight);
+  //当页面滚动超过navbar时，将navbar固定在页面上。
+  if (scrollHeight > navHeight) {
+    navbar.classList.add("fixed-nav");
+  } else {
+    navbar.classList.remove("fixed-nav");
+  }
+  //当页面滚动超过一定长度时，scroll button出现。
+  if (scrollHeight > 500) {
+    topLink.classList.add("show-link");
+  } else {
+    topLink.classList.remove("show-link");
+  }
+});
 // ********** smooth scroll ************
 // select links
